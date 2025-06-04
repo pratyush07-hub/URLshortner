@@ -1,0 +1,7 @@
+Tanstack mutaion --- data ko daalne ke liye 
+Tanstack Query --- data ko fetch karne ke liye
+
+Use Query gives data is loading, pending ,error , caching
+querykey -- a unique key  (data ko cache kar ke rakhta hai memory me jab tak aap page refresh naa karoo kyuki agar aap same data mangwate ho backend se to wo aapko yehi se de dega cache se backend pe nahi jaayega)
+
+InvalidateQueries -- apne data update kiya aor woh backend pe update ho gaya but joh query hai uske paas abhi bhi cached wala puarana data hai toh agar ham invalidate kar dete to next time jab bhi fetch karenge toh woh backend se naya wala data fetch karta hai
