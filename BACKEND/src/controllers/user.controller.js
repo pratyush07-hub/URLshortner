@@ -39,6 +39,8 @@ const registerUser = asyncHandler(async (req, res) => {
   const options = {
     httpOnly: true,
     secure: true,
+    sameSite: 'none',
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
   };
   res.cookie("accessToken", accessToken, options);
   return res
@@ -61,8 +63,8 @@ const loginUser = asyncHandler(async (req, res) => {
   const options = {
     httpOnly: true,
     secure: true,
-    sameSite: "None", // required for cross-origin cookies
-    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    sameSite: 'none',
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
   };
   const existedUser = await User.findById(user._id).select(
     "-password  -refreshToken"
