@@ -10,7 +10,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/create-url" element={<Homepage />} />
-        <Route path="/" element={<Registerform />} />
+        <Route path="/register" element={<Registerform />} />
         <Route
           path="/dashboard"
           element={
@@ -19,7 +19,7 @@ function App() {
             </PrivateRoute>
           }
         />
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
       </Routes>
     </Router>
   );

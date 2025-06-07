@@ -12,32 +12,31 @@ const Registerform = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log("Sending to backend:", { name, email, password });
       const response = await registerUser({
         name: name.trim(),
         email: email.trim(),
         password: password.trim(),
       });
       if (response.success) {
-        navigate("/dashboard"); // Redirect to homepage after successful registration
+        navigate("/dashboard");
       }
     } catch (error) {
-      alert(error.response?.data?.message || "Registration failed");
+      setError(error.response?.data?.message || "Registration failed");
     }
   };
 
   return (
-    <div className="bg-[#111] h-screen w-full flex justify-center items-center">
-      <div className="bg-[#e7e5e5] w-[40%] h-[70%] rounded-md">
-        <h1 className="text-4xl font-bold text-center mt-8">Register</h1>
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col items-center mt-10"
-        >
-          <div className="w-[80%] mb-4">
+    <div className="min-h-screen bg-gray-50 flex justify-center items-center px-4 sm:px-6 lg:px-8">
+      <div className="bg-white w-full max-w-md rounded-lg border border-gray-300 shadow-lg p-6 sm:p-8">
+        <h1 className="text-3xl sm:text-4xl font-bold text-center text-gray-800 mb-8">
+          Register
+        </h1>
+        
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
             <label
               htmlFor="name"
-              className="block text-lg font-semibold text-blue-700 mb-2"
+              className="block text-sm font-medium text-gray-700 mb-2"
             >
               Name:
             </label>
@@ -46,16 +45,16 @@ const Registerform = () => {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="bg-white border-2 border-blue-500 w-full p-2 rounded-md"
+              className="bg-white border border-gray-300 w-full p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Enter your name"
               required
             />
           </div>
 
-          <div className="w-[80%] mb-4">
+          <div>
             <label
               htmlFor="email"
-              className="block text-lg font-semibold text-blue-700 mb-2"
+              className="block text-sm font-medium text-gray-700 mb-2"
             >
               Email:
             </label>
@@ -64,16 +63,16 @@ const Registerform = () => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="bg-white border-2 border-blue-500 w-full p-2 rounded-md"
+              className="bg-white border border-gray-300 w-full p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Enter your email"
               required
             />
           </div>
 
-          <div className="w-[80%] mb-6">
+          <div>
             <label
               htmlFor="password"
-              className="block text-lg font-semibold text-blue-700 mb-2"
+              className="block text-sm font-medium text-gray-700 mb-2"
             >
               Password:
             </label>
@@ -82,30 +81,36 @@ const Registerform = () => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="bg-white border-2 border-blue-500 w-full p-2 rounded-md"
+              className="bg-white border border-gray-300 w-full p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Enter your password"
               required
             />
           </div>
 
-          {error && <div className="text-red-500 mb-4">{error}</div>}
+          {error && (
+            <div className="text-red-500 text-center text-sm">
+              {error}
+            </div>
+          )}
 
           <button
             type="submit"
-            className="bg-blue-500 w-[80%] text-white p-2 rounded-md hover:bg-blue-600 transition-colors"
+            className="w-full bg-blue-500 text-white p-3 rounded-md hover:bg-blue-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
             Register
           </button>
 
-          <p className="mt-4 text-gray-600">
-            Already have an account?{" "}
-            <button
-              onClick={() => navigate("/login")}
-              className="text-blue-500 hover:text-blue-600"
-            >
-              Login here
-            </button>
-          </p>
+          <div className="text-center mt-4">
+            <p className="text-gray-600 text-sm">
+              Already have an account?{" "}
+              <button
+                onClick={() => navigate("/")}
+                className="text-blue-500 hover:text-blue-600 font-medium focus:outline-none focus:underline"
+              >
+                Login here
+              </button>
+            </p>
+          </div>
         </form>
       </div>
     </div>

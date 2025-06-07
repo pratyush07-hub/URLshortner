@@ -1,19 +1,70 @@
 import React from 'react'
 import { FaLink, FaChartLine, FaClock, FaUser } from 'react-icons/fa'
 import Navbar from '../components/Navbar'
+import { useState } from 'react'
+import { getStats } from '../api/user.api'
+import { getRecentUrls } from '../api/shortUrl.api'
+import { useEffect } from 'react'
 
 const Dashboardpage = () => {
-  // Mock data - replace with actual data from your backend
-  const stats = [
-    { title: 'Total URLs', value: '1,234', icon: <FaLink className="text-blue-500" /> },
-    { title: 'Clicks Today', value: '567', icon: <FaChartLine className="text-green-500" /> },
-    { title: 'Active Links', value: '890', icon: <FaClock className="text-yellow-500" /> },
-  ]
+  const [stats, setStats] = useState({
+    totalUrls: 0,
+    totalClicks: 0
+  });
+  const [recent, setRecent] = useState([])
+  const [loading, setLoading] = useState(true);
 
-  const recentUrls = [
-    { id: 1, originalUrl: 'https://example.com/very-long-url', shortUrl: 'short.ly/abc123', clicks: 45, createdAt: '2024-03-20' },
-    { id: 2, originalUrl: 'https://another-example.com/long-url', shortUrl: 'short.ly/def456', clicks: 23, createdAt: '2024-03-19' },
-  ]
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const response = await getStats();
+        console.log("Stats response:", response);
+        if (response.data) {
+          setStats(response.data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch stats:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchStats();
+    const fetchRecentUrls = async () => {
+      try {
+        const response = await getRecentUrls();
+        console.log("recent Urls response:", response);
+        if (response.data) {
+          setRecent(response.data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch RecentUrls:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchRecentUrls();
+  }, []);
+
+  const statCards = [
+    { title: 'Total URLs', value: stats.totalUrls || 0, icon: <FaLink className="text-blue-500" /> },
+    { title: 'Total Clicks', value: stats.totalClicks || 0, icon: <FaChartLine className="text-green-500" /> },
+  ];
+
+
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <Navbar />
+        <div className="p-6">
+          <div className="flex justify-center items-center h-64">
+            <div className="text-xl text-gray-600">Loading...</div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -27,7 +78,7 @@ const Dashboardpage = () => {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          {stats.map((stat, index) => (
+          {statCards.map((stat, index) => (
             <div key={index} className="bg-white rounded-lg shadow p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -56,14 +107,14 @@ const Dashboardpage = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {recentUrls.map((url) => (
-                  <tr key={url.id}>
+                {recent.map((url) => (
+                  <tr key={url._id}>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      <div className="max-w-xs truncate">{url.originalUrl}</div>
+                      <div className="max-w-xs truncate">{url.full_url}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-blue-600">
-                      <a href={url.shortUrl} target="_blank" rel="noopener noreferrer">
-                        {url.shortUrl}
+                      <a href={`https://urlshortner-afmm.onrender.com/api/v1/shorturl/${url.short_url}`} target="_blank" rel="noopener noreferrer">
+                        {`urlshortner-afmm.onrender.com/api/v1/shorturl/${url.short_url}`}
                       </a>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{url.clicks}</td>

@@ -12,13 +12,17 @@ const logoutUser = async () => {
     await axiosInstance.get("/api/v1/user/logout")
 }
 const currentUser = async () => {
-    const { data } = await axiosInstance.get("/api/v1/user/me")
-    return data;
+    const response = await axiosInstance.get("/api/v1/user/me")
+    return response.data;
 }
-
+const getStats = async () => {
+    const response = await axiosInstance.get("/api/v1/user/stats")
+    return response.data;
+}
 export { 
     registerUser,
     loginUser,
     logoutUser,
-    currentUser
+    currentUser,
+    getStats
 }

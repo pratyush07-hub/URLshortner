@@ -41,65 +41,74 @@ const UrlForm = () => {
       setCopied(false);
     }, 1000);
   };
+
   return (
-    <div className="w-full rounded-md">
+    <div className="w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       <form
         onSubmit={handleSubmit}
-        action=""
-        className="flex flex-col mt-10 ml-20"
+        className="flex flex-col mt-6 sm:mt-10 space-y-4"
       >
         <label
           htmlFor="urlInput"
-          className="mb-2 text-lg font-semibold text-blue-700"
+          className="text-lg font-semibold text-blue-700"
         >
           Enter a URL to shorten:
         </label>
-        <input
-          id="customurlInput"
-          name="customurl"
-          value={customUrl}
-          onChange={updateValue}
-          type="text"
-          placeholder="customUrl"
-          className="bg-white border-2 border-blue-500 w-[20%] p-2 rounded-md"
-        />
-        <input
-          id="urlInput"
-          name="url"
-          value={url}
-          onChange={updateValue}
-          type="text"
-          placeholder="https://example.com"
-          className="bg-white border-2 border-blue-500 w-[80%] p-2 mt-4 rounded-md"
-        />
+        
+        <div className="flex flex-col sm:flex-row gap-4">
+          <div className="w-full sm:w-1/4">
+            <input
+              id="customurlInput"
+              name="customurl"
+              value={customUrl}
+              onChange={updateValue}
+              type="text"
+              placeholder="Custom URL (optional)"
+              className="bg-white border-2 border-blue-500 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          <div className="w-full sm:w-3/4">
+            <input
+              id="urlInput"
+              name="url"
+              value={url}
+              onChange={updateValue}
+              type="text"
+              placeholder="https://example.com"
+              className="bg-white border-2 border-blue-500 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+        </div>
+
         <button
           type="submit"
-          className="bg-blue-500 w-[20%] mt-8 text-white p-2 rounded-md"
+          className="bg-blue-500 w-full sm:w-auto sm:max-w-xs text-white p-2 rounded-md hover:bg-blue-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
         >
           Short URL
         </button>
       </form>
 
       {shortUrl && (
-        <div className="flex flex-col ml-20 mt-10">
-          <h1 className="text-2xl font-bold mt-2 mb-2">Your Shortened URL: </h1>
-          <div className="border-2 border-blue-500 flex justify-between w-[80%] rounded-md">
-            <input
-              value={shortUrl}
-              readOnly
-              type="text"
-              placeholder="https://example.com"
-              className="bg-white p-2 w-full rounded-md"
-            />
+        <div className="mt-8 sm:mt-10">
+          <h1 className="text-xl sm:text-2xl font-bold mb-4">Your Shortened URL: </h1>
+          <div className="flex flex-col sm:flex-row gap-2">
+            <div className="flex-1 border-2 border-blue-500 rounded-md overflow-hidden">
+              <input
+                value={shortUrl}
+                readOnly
+                type="text"
+                className="bg-white p-2 w-full focus:outline-none"
+              />
+            </div>
             <button
               onClick={handleCopy}
-              className={`px-8 rounded-r-md transition-colors duration-200 ${
+              className={`px-6 py-2 rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
                 copied
-                  ? "bg-green-400 text-white"
-                  : "bg-gray-200 hover:bg-gray-300"
+                  ? "bg-green-400 text-white focus:ring-green-500"
+                  : "bg-gray-200 hover:bg-gray-300 focus:ring-gray-500"
               }`}
             >
-              {copied ? "Copied" : "Copy"}
+              {copied ? "Copied!" : "Copy"}
             </button>
           </div>
         </div>

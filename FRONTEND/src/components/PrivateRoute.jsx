@@ -28,7 +28,7 @@ const PrivateRoute = ({ children }) => {
 
   if (!isAuthenticated) {
     // Redirect if not logged in
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/" replace />;
   }
 
   // If verified, render children
