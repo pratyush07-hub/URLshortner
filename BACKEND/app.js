@@ -10,7 +10,7 @@ dotenv.config({
     path: "./.env"
 });
 app.use(cors({
-    origin: ['http://localhost:5173', 'https://url-shortner-frontend.onrender.com'],
+    origin: ['http://localhost:5173', 'https://urlshortner-afmm.onrender.com'],
     credentials: true
 }))
 

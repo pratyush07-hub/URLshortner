@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-    baseURL: "https://urlshortner-afmm.onrender.com",
+    baseURL: import.meta.env.VITE_BACKEND_URI,
     timeout: 10000,
     withCredentials: true
 })

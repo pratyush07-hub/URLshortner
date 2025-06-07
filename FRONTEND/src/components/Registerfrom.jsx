@@ -21,7 +21,7 @@ const Registerform = () => {
         navigate("/dashboard");
       }
     } catch (error) {
-      setError(error.response?.data?.message || "Registration failed");
+      alert(error.response?.data?.message || "Registration failed");
     }
   };
 
