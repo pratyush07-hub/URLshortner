@@ -61,6 +61,8 @@ const loginUser = asyncHandler(async (req, res) => {
   const options = {
     httpOnly: true,
     secure: true,
+    sameSite: "None", // required for cross-origin cookies
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   };
   const existedUser = await User.findById(user._id).select(
     "-password  -refreshToken"
@@ -83,6 +85,8 @@ const logoutUser = asyncHandler(async (req, res) => {
   const options = {
     httpOnly: true,
     secure: true,
+    sameSite: "None", // required for cross-origin cookies
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   };
   return res
     .status(200)
@@ -97,13 +101,12 @@ const getCurrentUser = asyncHandler(async (req, res) => {
 
 const getStats = asyncHandler(async (req, res) => {
   try {
-    
     const userId = req.user._id;
     const stats = await User.aggregate([
-      { 
-        $match: { 
-          _id: userId 
-        } 
+      {
+        $match: {
+          _id: userId,
+        },
       },
       {
         $lookup: {
@@ -119,7 +122,7 @@ const getStats = asyncHandler(async (req, res) => {
           totalClicks: {
             $sum: "$totalUrls.clicks",
           },
-          totalActiveLinks: {}
+          totalActiveLinks: {},
         },
       },
       {
@@ -139,7 +142,6 @@ const getStats = asyncHandler(async (req, res) => {
     return res
       .status(200)
       .json(new ApiResponse(200, stats[0], "Stats fetched successfully"));
-    
   } catch (error) {
     throw new ApiError(500, "Error fetching user stats");
   }
