@@ -19,7 +19,11 @@ const shortUrlSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
-    }
+    },
+    isActive: { 
+        type: Boolean,
+        default: true 
+    },
 });
 
 export const shortUrl = mongoose.model("shortUrl", shortUrlSchema)
