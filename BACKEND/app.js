@@ -10,9 +10,13 @@ dotenv.config({
     path: "./.env"
 });
 app.use(cors({
-    origin: ['http://localhost:5173', 'https://urlshortner-afmm.onrender.com'],
-    credentials: true
-}))
+  origin: [
+    'http://localhost:5173',
+    'https://urlshortner-afmm.onrender.com',
+    'https://ur-lshortner-six.vercel.app' // ✅ Add this
+  ],
+  credentials: true
+}));
 
 app.use(cookieParser());
 
