@@ -11,6 +11,10 @@ const Registerform = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!name.match(/^[A-Za-z\s]{2,30}$/)) {
+      alert("Name should be 2-30 letters only.");
+      return;
+    }
     try {
       const response = await registerUser({
         name: name.trim(),
@@ -31,7 +35,7 @@ const Registerform = () => {
         <h1 className="text-3xl sm:text-4xl font-bold text-center text-gray-800 mb-8">
           Register
         </h1>
-        
+
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label
@@ -48,6 +52,7 @@ const Registerform = () => {
               className="bg-white border border-gray-300 w-full p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Enter your name"
               required
+              pattern="^[A-Za-z\s]{2,30}$"
             />
           </div>
 
@@ -66,9 +71,9 @@ const Registerform = () => {
               className="bg-white border border-gray-300 w-full p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Enter your email"
               required
+              pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
             />
           </div>
-
           <div>
             <label
               htmlFor="password"
@@ -84,13 +89,13 @@ const Registerform = () => {
               className="bg-white border border-gray-300 w-full p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Enter your password"
               required
+              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+              title="Password must be at least 8 characters long and include uppercase, lowercase, number, and special character."
             />
           </div>
 
           {error && (
-            <div className="text-red-500 text-center text-sm">
-              {error}
-            </div>
+            <div className="text-red-500 text-center text-sm">{error}</div>
           )}
 
           <button
