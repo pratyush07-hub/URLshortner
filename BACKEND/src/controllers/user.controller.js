@@ -40,6 +40,8 @@ const registerUser = asyncHandler(async (req, res) => {
     httpOnly: true,
     secure: true,
     sameSite: 'none',
+    domain: '.onrender.com',
+    path: '/',
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
   };
   res.cookie("accessToken", accessToken, options);
@@ -64,6 +66,8 @@ const loginUser = asyncHandler(async (req, res) => {
     httpOnly: true,
     secure: true,
     sameSite: 'none',
+    domain: '.onrender.com',
+    path: '/',
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
   };
   const existedUser = await User.findById(user._id).select(
@@ -87,8 +91,10 @@ const logoutUser = asyncHandler(async (req, res) => {
   const options = {
     httpOnly: true,
     secure: true,
-    sameSite: "None", // required for cross-origin cookies
-    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    sameSite: 'none',
+    domain: '.onrender.com',
+    path: '/',
+    maxAge: 0
   };
   return res
     .status(200)
