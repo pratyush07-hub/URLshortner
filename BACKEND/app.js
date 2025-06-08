@@ -12,7 +12,6 @@ dotenv.config({
 // CORS configuration
 app.use(cors({
     origin: [
-        'http://localhost:5173',
         'https://urlshortner-afmm.onrender.com',
         'https://url-shortner-frontend-orcin.vercel.app'
     ],
