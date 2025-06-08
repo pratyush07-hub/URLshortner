@@ -13,6 +13,7 @@ dotenv.config({
 app.use(cors({
     origin: [
         'http://localhost:5173',
+        'https://urlshortner-afmm.onrender.com',
         'https://url-shortner-frontend-orcin.vercel.app'
     ],
     credentials: true,
