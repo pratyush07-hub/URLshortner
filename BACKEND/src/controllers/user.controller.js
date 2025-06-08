@@ -93,7 +93,7 @@ const logoutUser = asyncHandler(async (req, res) => {
     httpOnly: true,
     secure: true,
     sameSite: 'none',
-    domain: '.onrender.com',
+    // domain: '.onrender.com',
     path: '/',
     maxAge: 0
   };
