@@ -63,7 +63,7 @@ const loginUser = asyncHandler(async (req, res) => {
   }
   const accessToken = user.generateAccessToken();
   const options = {
-    httpOnly: true,
+    // httpOnly: true,
     secure: true,
     sameSite: 'none',
     // domain: '.onrender.com',
