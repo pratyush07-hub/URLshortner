@@ -13,7 +13,7 @@ const Loginform = () => {
     try {
       const response = await loginUser({ email, password });
       if (response.success) {
-        navigate("/dashboard");
+        navigate("/create-url");
       }
     } catch (error) {
       alert(error.response?.data?.message || "Login failed");

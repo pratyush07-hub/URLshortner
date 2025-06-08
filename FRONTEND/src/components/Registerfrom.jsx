@@ -15,6 +15,22 @@ const Registerform = () => {
       alert("Name should be 2-30 letters only.");
       return;
     }
+    if (!email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+    if (
+      !password.match(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+      )
+    ) {
+      alert(
+        "Password must be at least 8 characters long and include one uppercase letter, one lowercase letter, one number, and one special character."
+      );
+
+      return;
+    }
+
     try {
       const response = await registerUser({
         name: name.trim(),
@@ -22,7 +38,7 @@ const Registerform = () => {
         password: password.trim(),
       });
       if (response.success) {
-        navigate("/dashboard");
+        navigate("/create-url");
       }
     } catch (error) {
       alert(error.response?.data?.message || "Registration failed");

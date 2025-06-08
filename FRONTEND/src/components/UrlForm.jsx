@@ -3,7 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createShortUrl } from "../api/shortUrl.api.js";
 
 const UrlForm = () => {
-  const [url, setUrl] = useState("https://www.google.com/");
+  const [url, setUrl] = useState("");
   const [shortUrl, setShortUrl] = useState();
   const [customUrl, setCustomUrl] = useState();
   const [copied, setCopied] = useState(false);
