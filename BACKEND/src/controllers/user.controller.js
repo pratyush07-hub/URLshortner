@@ -66,7 +66,7 @@ const loginUser = asyncHandler(async (req, res) => {
     httpOnly: true,
     secure: true,
     sameSite: 'none',
-    domain: '.onrender.com',
+    // domain: '.onrender.com',
     path: '/',
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
   };
@@ -76,7 +76,7 @@ const loginUser = asyncHandler(async (req, res) => {
   res.cookie("accessToken", accessToken, options);
   return res
     .status(200)
-    .json(new ApiResponse(200, existedUser, "User LoggedIn successfully"));
+    .json(new ApiResponse(200, { user: existedUser, accessToken }, "User LoggedIn successfully"));
 });
 const logoutUser = asyncHandler(async (req, res) => {
   await User.findByIdAndUpdate(
