@@ -37,8 +37,8 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 
   const options = {
-    // httpOnly: true,
-    // secure: true,
+    httpOnly: true,
+    secure: true,
     sameSite: 'none',
     // domain: '.onrender.com',
     path: '/',
@@ -46,7 +46,7 @@ const registerUser = asyncHandler(async (req, res) => {
   };
   return res
     .status(200)
-    .cookie("accessToken", accessToken)
+    .cookie("accessToken", accessToken, options)
     .json(new ApiResponse(200, { user: existedUser, accessToken }, "User LoggedIn successfully"));
 });
 
@@ -63,8 +63,8 @@ const loginUser = asyncHandler(async (req, res) => {
   }
   const accessToken = user.generateAccessToken();
   const options = {
-    // httpOnly: true,
-    // secure: true,
+    httpOnly: true,
+    secure: true,
     sameSite: 'none',
     // domain: '.onrender.com',
     path: '/',
@@ -76,7 +76,7 @@ const loginUser = asyncHandler(async (req, res) => {
   
   return res
     .status(200)
-    .cookie("accessToken", accessToken)
+    .cookie("accessToken", accessToken, options)
     .json(new ApiResponse(200, { user: existedUser, accessToken }, "User LoggedIn successfully"));
 });
 const logoutUser = asyncHandler(async (req, res) => {
@@ -90,8 +90,8 @@ const logoutUser = asyncHandler(async (req, res) => {
     { new: true }
   );
   const options = {
-    // httpOnly: true,
-    // secure: true,
+    httpOnly: true,
+    secure: true,
     sameSite: 'none',
     domain: '.onrender.com',
     path: '/',
@@ -99,7 +99,7 @@ const logoutUser = asyncHandler(async (req, res) => {
   };
   return res
     .status(200)
-    .clearCookie("accessToken")
+    .clearCookie("accessToken", options)
     .json(new ApiResponse(200, {}, "User logged out successfully"));
 });
 const getCurrentUser = asyncHandler(async (req, res) => {
