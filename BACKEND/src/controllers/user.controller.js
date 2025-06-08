@@ -40,14 +40,14 @@ const registerUser = asyncHandler(async (req, res) => {
     httpOnly: true,
     secure: true,
     sameSite: 'none',
-    domain: '.onrender.com',
+    // domain: '.onrender.com',
     path: '/',
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
   };
-  res.cookie("accessToken", accessToken, options);
   return res
     .status(200)
-    .json(new ApiResponse(200, createdUser, "User registered successfully"));
+    .cookie("accessToken", accessToken, options)
+    .json(new ApiResponse(200, { user: existedUser, accessToken }, "User LoggedIn successfully"));
 });
 
 const loginUser = asyncHandler(async (req, res) => {
@@ -63,7 +63,7 @@ const loginUser = asyncHandler(async (req, res) => {
   }
   const accessToken = user.generateAccessToken();
   const options = {
-    // httpOnly: true,
+    httpOnly: true,
     secure: true,
     sameSite: 'none',
     // domain: '.onrender.com',
@@ -73,9 +73,10 @@ const loginUser = asyncHandler(async (req, res) => {
   const existedUser = await User.findById(user._id).select(
     "-password  -refreshToken"
   );
-  res.cookie("accessToken", accessToken, options);
+  
   return res
     .status(200)
+    .cookie("accessToken", accessToken, options)
     .json(new ApiResponse(200, { user: existedUser, accessToken }, "User LoggedIn successfully"));
 });
 const logoutUser = asyncHandler(async (req, res) => {
