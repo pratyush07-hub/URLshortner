@@ -18,7 +18,7 @@ const Dashboardpage = () => {
     const fetchStats = async () => {
       try {
         const response = await getStats();
-        console.log("Stats response:", response);
+        // console.log("Stats response:", response);
         if (response.data) {
           setStats(response.data);
         }
@@ -32,7 +32,7 @@ const Dashboardpage = () => {
     const fetchRecentUrls = async () => {
       try {
         const response = await getRecentUrls();
-        console.log("recent Urls response:", response);
+        // console.log("recent Urls response:", response);
         if (response.data) {
           setRecent(response.data);
         }

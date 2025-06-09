@@ -6,6 +6,7 @@ const registerUser = async (userData) => {
 }
 const loginUser = async (userData) => {
     const response = await axiosInstance.post("/api/v1/user/login", userData);
+    // console.log("Access Token:", response.data.data.accessToken);
     return response.data;
 }
 const logoutUser = async () => {

@@ -38,6 +38,10 @@ const Registerform = () => {
         password: password.trim(),
       });
       if (response.success) {
+        // Save access token if backend sends it, adjust 'accessToken' as per your API
+        if (response.data?.accessToken) {
+          localStorage.setItem("accessToken", response.data.accessToken);
+        }
         navigate("/create-url");
       }
     } catch (error) {

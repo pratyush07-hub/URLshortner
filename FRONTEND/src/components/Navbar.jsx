@@ -13,7 +13,7 @@ const Navbar = () => {
     const fetchUser = async () => {
       try {
         const userData = await currentUser();
-        console.log("Fetched user:", userData);
+        // console.log("Fetched user:", userData);
         setUser(userData);
       } catch (error) {
         console.error("Failed to fetch user:", error);
