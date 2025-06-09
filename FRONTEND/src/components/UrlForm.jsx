@@ -19,7 +19,7 @@ const UrlForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { data } = await createShortUrl(url, customUrl);
-    console.log("Submitted Url: ", data);
+    // console.log("Submitted Url: ", data);
     setShortUrl(data);
   };
 
