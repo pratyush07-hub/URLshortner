@@ -18,9 +18,16 @@ const UrlForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { data } = await createShortUrl(url, customUrl);
-    // console.log("Submitted Url: ", data);
-    setShortUrl(data);
+    try {
+      const { data } = await createShortUrl(url, customUrl);
+      setShortUrl(data); // success
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        alert("Custom URL already exists."); // show "Custom URL already exists."
+      } else {
+        alert("Custom URL already exists.");
+      }
+    }
   };
 
   // const query = useQuery({ queryKey: [] , queryFn: handleSubmit })
@@ -54,7 +61,7 @@ const UrlForm = () => {
         >
           Enter a URL to shorten:
         </label>
-        
+
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="w-full sm:w-1/4">
             <input
@@ -90,7 +97,9 @@ const UrlForm = () => {
 
       {shortUrl && (
         <div className="mt-8 sm:mt-10">
-          <h1 className="text-xl sm:text-2xl font-bold mb-4">Your Shortened URL: </h1>
+          <h1 className="text-xl sm:text-2xl font-bold mb-4">
+            Your Shortened URL:{" "}
+          </h1>
           <div className="flex flex-col sm:flex-row gap-2">
             <div className="flex-1 border-2 border-blue-500 rounded-md overflow-hidden">
               <input
