@@ -39,7 +39,7 @@ app.use(express.urlencoded({extended:true}))
 import shorturlRouter from "./src/routes/shorturl.routes.js";
 import userRouter from "./src/routes/user.routes.js";
 
-app.use("/api/v1/shorturl", shorturlRouter)
+app.use("/", shorturlRouter)
 app.use("/api/v1/user", userRouter)
 
 connectDB()

@@ -1,5 +1,5 @@
 import { shortUrl } from "../models/shorturl.model.js";
-import { asyncHandler } from "../utils/asynchandler.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 import { generateNanoId } from "../services/helper.js"
 import { checkCustomUrl } from "../dao/short_url.js";
 import { ApiError } from "../utils/ApiError.js";
