@@ -113,8 +113,8 @@ const Dashboardpage = () => {
                       <div className="max-w-xs truncate">{url.full_url}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-blue-600">
-                      <a href={`https://urlshortner-afmm.onrender.com/${url.short_url}`} target="_blank" rel="noopener noreferrer">
-                        {`urlshortner-afmm.onrender.com/${url.short_url}`}
+                      <a href={`http://urlshortner.rf.gd/${url.short_url}`} target="_blank" rel="noopener noreferrer">
+                        {`urlshortner.rf.gd/${url.short_url}`}
                       </a>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{url.clicks}</td>

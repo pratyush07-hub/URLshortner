@@ -60,7 +60,7 @@ const createShortUrlAuth = asyncHandler(async (req, res) => {
     throw new ApiError(500, "Failed to generate short URL");
   }
 
-  const fullShortUrl = `${process.env.API_URL}/${newUrl.short_url}`;
+  const fullShortUrl = `http://urlshortner.rf.gd/${newUrl.short_url}`;
 
   return res
     .status(200)
